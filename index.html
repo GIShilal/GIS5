@@ -1,14 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css"/>
-    <title>Dokumentasi API GIS</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/style.css" type="text/css"/>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/node_modules/ol/ol.css">
+    <title>Tugas 5 Sistem Informasi Geografis</title>
 </head>
 <body>
-    <div id="swagger-ui"></div> 
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                class="img-fluid" alt="Sample image">
+            </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form3Example3" class="form-control form-control-lg"
+                    placeholder="Enter a valid email address" />
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+      
+                <!-- Password input -->
+                <div class="form-outline mb-3">
+                  <input type="password" id="form3Example4" class="form-control form-control-lg"
+                    placeholder="Enter password" />
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="button" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                      class="link-danger">Register</a></p>
+                </div>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <script type="module" src="./js/swagger.js"></script>
+    <h1 style="text-align: center;">Geographic Information System</h1>
+    <h2 style="text-align: center;">Nama : Hilal Fakhri Dzakwan</h2>
+    <h2 style="text-align: center;">NPM: 1214018</h2>
+    <h2 style="text-align: center;">Chapter 5</h2>
+    <div id='map'></div>
+    <div class="col-auto">
+        <span class="input-group">
+          <label class="input-group-text" for="type">Geometry type:</label>
+          <select class="form-select" id="type">
+            <option value="Point">Point</option>
+            <option value="LineString">LineString</option>
+            <option value="Polygon">Polygon</option>
+            <option value="Circle">Circle</option>
+            <option value="None" selected>None</option>
+          </select>
+          <input class="form-control" type="button" value="Undo" id="undo">
+        </span>
+      </div>
+        <input type="hidden" id="idmarker" name="idmarker" value="">
+    
+        <div id="popupinfo" class="ol-popup">
+            <b id="popupinfo-title"></b>
+            <div id="popupinfo-content"></div>
+            <div id="popupinfo-delete">
+                <input type="hidden" id="idmarker" name="idmarker" value="">
+                <button id="hapusbutton" type="button">Hapus</button><button id="hitungcogbutton" type="button">Hitung COG</button><br>
+            </div>
+            
+        </div>
+    
+        <div id="popup" class="ol-popup">
+            <b id="popup-title">Input Center of Gravity</b><a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+            <div id="popup-input">
+                Nama : <input type="text" id="name" name="name" required><br>
+                Volume : <input type="text" id="volume" name="volume" required><br>
+                <input type="hidden" id="long" name="long" value="">
+                <input type="hidden" id="lat" name="lat" value="">
+                <button id="insertmarkerbutton" type="button">Input</button><br>
+            </div>
+        </div>
+<div id="info-table">
+    <div class="point-table">
+    <h1>Type Point</h1>
+    <table id="pointTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th >Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="lokasi"></tbody>
+    </table>
+</div>
+
+<div class="polygon-table">
+    <h1>Type Polygon</h1>
+    <table id="polygonTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="polygon"></tbody>
+    </table>
+</div>
+
+<div class="polyline-table">
+    <h1>Type Polyline</h1>
+    <table id="polylineTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coordinate</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="line"></tbody>
+    </table>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ol@v8.1.0/dist/ol.js"></script>
+<script type="module" src="./js/main.js"></script>
 </body>
-</html>l
+</html>
