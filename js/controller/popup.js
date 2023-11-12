@@ -7,6 +7,31 @@ import {setInner,textBlur,onClick, getValue,setValue} from 'https://jscroot.gith
 import { postWithToken } from "https://jscroot.github.io/api/croot.js";
 import { setCookieWithExpireHour, getCookie } from 'https://jscroot.github.io/cookie/croot.js';
 
+let userToken;
+
+// Function to get the token from cookies with a specific parameter
+export function getTokenFromCookies(cookieName) {
+  const token = getCookie(cookieName);
+  return token;
+}
+
+// Function to get the token from API and store it in cookies
+export function getTokenFromAPI() {
+  const tokenUrl = "https://asia-southeast2-formidable-feat-401903.cloudfunctions.net/geopost";
+  fetch(tokenUrl)
+    .then(response => response.json())
+    .then(tokenData => {
+      if (tokenData.token) {
+        userToken = tokenData.token;
+        console.log('Token dari API:', userToken);
+        setCookieWithExpireHour('user_token', userToken, 2); // Set the token in cookies
+      }
+    })
+    .catch(error => console.error('Gagal mengambil token:', error));
+}
+
+// Retrieve the token from cookies
+userToken = getTokenFromCookies('user_token');
 
 export function onClosePopupClick() {
     overlay.setPosition(undefined);
